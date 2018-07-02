@@ -47,7 +47,9 @@ set backspace=indent,eol,start
 
 "<<<visual>>>  {{{1
 "カラー
-syntax on
+syntax enable
+"colorsceheme
+colorscheme molokai
 " 行番号を表示
 set number
 " 行末の1文字先までカーソルを移動できるように
