@@ -159,7 +159,15 @@ noremap ; :
 " 折り返し時に表示行単位での移動できるようにする
 noremap j gj
 noremap k gk
+"vim-altrにより必要ファイルへジャンプ
+nmap <F2> <Plug>(altr-forward)
 
+"<<<vim-plug>>> {{{1
+"vim-plug(プラグインマネージャの設定)
+call plug#begin()
+"ここにプラグインを追加"
+Plug 'kana/vim-altr' "http://labs.timedia.co.jp/2011/07/vim-altr.html
+call plug#end()
 
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする
