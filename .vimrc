@@ -169,6 +169,11 @@ call plug#begin()
 Plug 'kana/vim-altr' "http://labs.timedia.co.jp/2011/07/vim-altr.html
 call plug#end()
 
+"<<<vim-altr>>> {{{1
+"ディレクトリ分けされていても移動できるようにする
+call altr#define('Src/%.c%','Inc/%.h%')
+
+
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする
 " vim: foldmethod=marker
