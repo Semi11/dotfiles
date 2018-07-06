@@ -134,6 +134,8 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 "置換時のgオプションをデフォルトで有効化する
 set gdefault
+"%拡張
+source $VIMRUNTIME/macros/matchit.vim
 
 
 "<<<map>>>  {{{1
