@@ -164,6 +164,14 @@ noremap k gk
 "vim-altrにより必要ファイルへジャンプ
 nmap <F2> <Plug>(altr-forward)
 
+"<<<auto-complete>>> {{{1
+"http://io-fia.blogspot.com/2012/11/vimvimrc.html
+set completeopt=menuone
+for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+  exec "imap " . k . " " . k . "<C-N><C-P>"
+endfor
+
+imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 "<<<vim-plug>>> {{{1
 "vim-plug(プラグインマネージャの設定)
 call plug#begin()
