@@ -177,12 +177,24 @@ imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 call plug#begin()
 "ここにプラグインを追加"
 Plug 'kana/vim-altr' "http://labs.timedia.co.jp/2011/07/vim-altr.html
+Plug 'tyru/caw.vim'
 call plug#end()
 
 "<<<vim-altr>>> {{{1
 "ディレクトリ分けされていても移動できるようにする
 call altr#define('Src/%.c%','Inc/%.h%')
 
+"<<<caw.vim>>> {{{1
+" コメントアウトを切り替えるマッピング
+" \c でカーソル行をコメントアウト
+" 再度 \c でコメントアウトを解除
+" 選択してから複数行の \c も可能
+nmap \c <Plug>(caw:zeropos:toggle)
+vmap \c <Plug>(caw:zeropos:toggle)
+
+" \C でコメントアウトの解除
+nmap \C <plug>(caw:hatpos:uncomment)
+vmap \C <plug>(caw:hatpos:uncomment)
 
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする
