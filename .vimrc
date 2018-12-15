@@ -166,18 +166,26 @@ nmap <F2> <Plug>(altr-forward)
 
 "<<<auto-complete>>> {{{1
 "http://io-fia.blogspot.com/2012/11/vimvimrc.html
-set completeopt=menuone
-for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-  exec "imap " . k . " " . k . "<C-N><C-P>"
-endfor
+" set completeopt=menuone
+" for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+"   exec "imap " . k . " " . k . "<C-N><C-P>"
+" endfor
+"
+" imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 
-imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+"<<<c++>>> {{{1
+"c++ library include path
+setlocal path+=/usr/include/c++/5.4.0/
+
 "<<<vim-plug>>> {{{1
 "vim-plug(プラグインマネージャの設定)
 call plug#begin()
 "ここにプラグインを追加"
 Plug 'kana/vim-altr' "http://labs.timedia.co.jp/2011/07/vim-altr.html
 Plug 'tyru/caw.vim'
+Plug 'shougo/neocomplete'
+Plug 'shougo/neosnippet'
+Plug 'shougo/neosnippet-snippets'
 call plug#end()
 
 "<<<vim-altr>>> {{{1
@@ -195,6 +203,53 @@ vmap \c <Plug>(caw:zeropos:toggle)
 " \C でコメントアウトの解除
 nmap \C <plug>(caw:hatpos:uncomment)
 vmap \C <plug>(caw:hatpos:uncomment)
+
+"<<<neocomplete>>> {{{1
+" 補完を有効にする
+let g:neocomplete#enable_at_startup = 1
+
+" 補完に時間がかかってもスキップしない
+let g:neocomplete#skip_auto_completion_time = ""
+
+inoremap <expr><C-i>     neocomplete#complete_common_string()
+
+" smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplete#enable_smart_case = 1
+" 2文字以上の単語に対して補完を有効にする
+let g:neocomplete#min_keyword_length = 2
+" 区切り文字まで補完する
+let g:neocomplete#enable_auto_delimiter = 1
+" 1文字目の入力から補完のポップアップを表示
+let g:neocomplete#auto_completion_start_length = 1
+" バックスペースで補完のポップアップを閉じる
+inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
+
+"<<<neosnippet>>> {{{1
+" スニペットを展開するキーマッピング
+" <ENTER> で選択されているスニペットの展開を行う
+" 選択されている候補がスニペットであれば展開し、
+" それ以外であれば次の候補を選択する
+" <TAB>で候補を選択
+" また、既にスニペットが展開されている場合は次のマークへと移動する
+imap <expr><CR> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+
+imap <expr> <TAB> pumvisible() ? "\<Down>" : neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+
+" 現在の filetype のスニペットを編集する為のキーマッピング
+" こうしておくことでサッと編集や追加などを行うことができる
+" 以下の設定では新しいタブでスニペットファイルを開く
+nnoremap <Space>ns :execute "tabnew\|:NeoSnippetEdit ".&filetype<CR>
+
+
+" スニペットファイルの保存ディレクトリを設定
+let g:neosnippet#snippets_directory = "~/.neosnippet"
 
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする

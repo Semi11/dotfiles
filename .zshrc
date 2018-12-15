@@ -164,6 +164,17 @@ function chpwd() { ls }
 
 #https://gist.github.com/mollifier/4979906
 #https://qiita.com/uasi/items/c4288dd835a65eb9d709
-#//qiita.com/ryutoyasugi/items/cb895814d4149ca44f12 
+#//qiita.com/ryutoyasugi/items/cb895814d4149ca44f12
 #http://tkengo.github.io/blog/2013/05/12/zsh-vcs-info/
 #https://qiita.com/natmark/items/06654a44a8704cfaa8ca
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+
+#export PATH=$PATH:$HOME/go/bin:/usr/lib/go-1.10/bin
+export PATH=$PATH:$HOME/Documents/go/bin:/usr/local/go/bin
+export GOPATH=/home/seimi/Documents/go
+export PATH=$PATH:$GOPATH/bin
+
+export EDITOR=vim
+eval "$(direnv hook zsh)"
