@@ -186,13 +186,18 @@ Plug 'tyru/caw.vim'
 Plug 'shougo/neocomplete'
 Plug 'shougo/neosnippet'
 Plug 'shougo/neosnippet-snippets'
+Plug 'reireias/vim-cheatsheet'
+Plug 'rcmdnk/vim-markdown' "https://rcmdnk.com/blog/2013/11/17/computer-vim
+Plug 'kannokanno/previm'
+Plug 'tyru/open-browser.vim'
 call plug#end()
 
-"<<<vim-altr>>> {{{1
+"<<<plugins>>> {{{1
+"<<<vim-altr>>> {{{2
 "ディレクトリ分けされていても移動できるようにする
 call altr#define('Src/%.c%','Inc/%.h%')
 
-"<<<caw.vim>>> {{{1
+"<<<caw.vim>>> {{{2
 " コメントアウトを切り替えるマッピング
 " \c でカーソル行をコメントアウト
 " 再度 \c でコメントアウトを解除
@@ -204,7 +209,7 @@ vmap \c <Plug>(caw:zeropos:toggle)
 nmap \C <plug>(caw:hatpos:uncomment)
 vmap \C <plug>(caw:hatpos:uncomment)
 
-"<<<neocomplete>>> {{{1
+"<<<neocomplete>>> {{{2
 " 補完を有効にする
 let g:neocomplete#enable_at_startup = 1
 
@@ -224,7 +229,7 @@ let g:neocomplete#auto_completion_start_length = 1
 " バックスペースで補完のポップアップを閉じる
 inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 
-"<<<neosnippet>>> {{{1
+"<<<neosnippet>>> {{{2
 " スニペットを展開するキーマッピング
 " <ENTER> で選択されているスニペットの展開を行う
 " 選択されている候補がスニペットであれば展開し、
@@ -250,6 +255,18 @@ nnoremap <Space>ns :execute "tabnew\|:NeoSnippetEdit ".&filetype<CR>
 
 " スニペットファイルの保存ディレクトリを設定
 let g:neosnippet#snippets_directory = "~/.neosnippet"
+
+"<<<vim-cheatsheat>>> {{{2
+let g:cheatsheet#cheat_file = '~/.vimcheatsheet.md'
+
+"<<<markdown>>> {{{2
+autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
+autocmd BufRead,BufNewFile *.md  set filetype=markdown
+" Need: kannokanno/previm
+nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
+" 自動で折りたたまないようにする
+let g:vim_markdown_folding_disabled=1
+let g:previm_enable_realtime = 1
 
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする
