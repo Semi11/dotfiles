@@ -190,6 +190,7 @@ Plug 'reireias/vim-cheatsheet'
 Plug 'rcmdnk/vim-markdown' "https://rcmdnk.com/blog/2013/11/17/computer-vim
 Plug 'kannokanno/previm'
 Plug 'tyru/open-browser.vim'
+Plug 'alvan/vim-closetag'
 call plug#end()
 
 "<<<plugins>>> {{{1
@@ -267,6 +268,9 @@ nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
 " 自動で折りたたまないようにする
 let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
+
+"<<vim-closetag>>> {{{2
+let g:closetag_filenames = '*.html, *.html.erb, *.vue'
 
 "<<<modeline>>>  {{{1
 "makerで折りたたむようにする
